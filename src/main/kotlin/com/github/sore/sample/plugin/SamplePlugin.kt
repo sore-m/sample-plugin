@@ -1,3 +1,5 @@
+package com.github.sore.sample.plugin
+
 import org.bukkit.Bukkit
 import org.bukkit.GameRule
 import org.bukkit.plugin.java.JavaPlugin

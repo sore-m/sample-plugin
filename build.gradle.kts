@@ -6,6 +6,9 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
+group = "com.github.sore"
+version = "0.0.1"
+
 repositories {
     mavenCentral()
     maven(url = "https://papermc.io/repo/repository/maven-public/")

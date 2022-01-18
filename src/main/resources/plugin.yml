@@ -1,4 +1,4 @@
 name: Sample
-version: '${version}'
-main: com.sore.sample.Sample
+version: ${version}
+main: com.github.sore.sample.plugin.SamplePlugin
 api-version: 1.18
