@@ -1,6 +1,8 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    kotlin("jvm") version "1.6.0"
-    kotlin("plugin.serialization") version "1.6.0"
+    kotlin("jvm") version "1.6.10"
+    id("org.jetbrains.dokka") version "1.6.10"
 }
 
 java {
@@ -17,36 +19,48 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
+    compileOnly("io.github.monun:heartbeat-coroutines:0.0.3")
+    compileOnly("io.github.monun:kommand-api:2.8.1")
 
-    implementation("io.github.monun:heartbeat-coroutines:0.0.3")
-    implementation("io.github.monun:kommand-api:2.8.1")
     implementation(kotlin("stdlib"))
+    implementation(kotlin("reflect"))
 }
 
-project.extra.set("packageName", name.replace("-", ""))
-project.extra.set("pluginName", name.split('-').joinToString("") { it.capitalize() })
-
 tasks {
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
+    }
     processResources {
         filesMatching("**/*.yml") {
             expand(project.properties)
-            expand(project.extra.properties)
         }
     }
 
-    test {
-        useJUnitPlatform()
+    register<Jar>("sourcesJar") {
+        archiveClassifier.set("sources")
+        from(sourceSets["main"].allSource)
     }
 
-    create<Jar>("paperJar") {
-        from(sourceSets["main"].output)
-        archiveBaseName.set(project.extra.properties["pluginName"].toString())
+    register<Jar>("dokkaJar") {
+        archiveClassifier.set("javadoc")
+        dependsOn("dokkaHtml")
+
+        from("$buildDir/dokka/html/") {
+            include("**")
+        }
+    }
+
+    register<Jar>("paperJar") {
+        archiveBaseName.set(project.name)
+        archiveClassifier.set("")
         archiveVersion.set("")
+
+        from(sourceSets["main"].output)
 
         doLast {
             copy {
                 from(archiveFile)
-                val plugins = File(rootDir, ".debug/plugins/")
+                val plugins = File(rootDir, ".server/plugins/")
                 into(if (File(plugins, archiveFileName.get()).exists()) File(plugins, "update") else plugins)
             }
         }
