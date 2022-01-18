@@ -40,7 +40,7 @@ tasks {
     create<Jar>("paperJar") {
         from(sourceSets["main"].output)
         archiveBaseName.set(project.extra.properties["pluginName"].toString())
-        archiveVersion.set("") // For bukkit plugin update
+        archiveVersion.set("")
 
         doLast {
             copy {
