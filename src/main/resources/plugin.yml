@@ -1,0 +1,4 @@
+name: Sample
+version: '${version}'
+main: com.sore.sample.Sample
+api-version: 1.18
