@@ -2,7 +2,6 @@ package com.github.sore.sample.plugin
 
 import org.bukkit.Bukkit
 import org.bukkit.GameRule
-import org.bukkit.Location
 import org.bukkit.plugin.java.JavaPlugin
 
 class SamplePlugin : JavaPlugin() {

@@ -19,9 +19,10 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
-    compileOnly("io.github.monun:heartbeat-coroutines:0.0.3")
-    compileOnly("io.github.monun:kommand-api:2.8.1")
 
+    implementation("io.github.monun:heartbeat-coroutines:0.0.3")
+    implementation("io.github.monun:kommand-api:2.8.1")
+    implementation("io.github.monun:tap-api:4.3.2")
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
 }
