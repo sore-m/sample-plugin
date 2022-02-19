@@ -1,16 +1,14 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     kotlin("jvm") version "1.6.10"
-    id("org.jetbrains.dokka") version "1.6.10"
+    kotlin("plugin.serialization") version "1.6.20-M1"
 }
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
-group = "com.github.sore"
-version = "0.0.1"
+project.extra.set("packageName", name.replace("-", ""))
+project.extra.set("pluginName", name.split('-').joinToString("") { it.capitalize() })
 
 repositories {
     mavenCentral()
@@ -28,40 +26,26 @@ dependencies {
 }
 
 tasks {
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
-    }
     processResources {
         filesMatching("**/*.yml") {
             expand(project.properties)
+            expand(project.extra.properties)
         }
     }
 
-    register<Jar>("sourcesJar") {
-        archiveClassifier.set("sources")
-        from(sourceSets["main"].allSource)
+    test {
+        useJUnitPlatform()
     }
 
-    register<Jar>("dokkaJar") {
-        archiveClassifier.set("javadoc")
-        dependsOn("dokkaHtml")
-
-        from("$buildDir/dokka/html/") {
-            include("**")
-        }
-    }
-
-    register<Jar>("paperJar") {
-        archiveBaseName.set(project.name)
-        archiveClassifier.set("")
-        archiveVersion.set("")
-
+    create<Jar>("paperJar") {
         from(sourceSets["main"].output)
+        archiveBaseName.set(project.extra.properties["pluginName"].toString())
+        archiveVersion.set("") // For bukkit plugin update
 
         doLast {
             copy {
                 from(archiveFile)
-                val plugins = File(rootDir, ".server/plugins/")
+                val plugins = File(rootDir, ".debug/plugins/")
                 into(if (File(plugins, archiveFileName.get()).exists()) File(plugins, "update") else plugins)
             }
         }

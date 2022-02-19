@@ -1,4 +1,4 @@
-name: Sample
+name: ${pluginName}
 version: ${version}
-main: com.github.sore.sample.plugin.SamplePlugin
+main: ${group}.${packageName}.plugin.${pluginName}Plugin
 api-version: 1.18
