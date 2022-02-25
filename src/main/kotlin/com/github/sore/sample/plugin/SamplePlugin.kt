@@ -14,7 +14,7 @@ class SamplePlugin : JavaPlugin() {
             world.setGameRule(GameRule.SPAWN_RADIUS, 2)
             world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true)
             world.setGameRule(GameRule.COMMAND_BLOCK_OUTPUT, false)
-            world.setGameRule(GameRule.DO_LIMITED_CRAFTING, false)
+            world.setGameRule(GameRule.DO_LIMITED_CRAFTING, true)
             world.setGameRule(GameRule.SPECTATORS_GENERATE_CHUNKS, false)
             world.setGameRule(GameRule.SEND_COMMAND_FEEDBACK, true)
             world.setGameRule(GameRule.LOG_ADMIN_COMMANDS, true)
