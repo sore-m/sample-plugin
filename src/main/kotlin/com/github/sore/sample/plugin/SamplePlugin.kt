@@ -36,7 +36,7 @@ class SamplePlugin : JavaPlugin() {
             w.setGameRule(GameRule.SPAWN_RADIUS, 2)
             w.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true)
             w.setGameRule(GameRule.COMMAND_BLOCK_OUTPUT, false)
-            w.setGameRule(GameRule.DO_LIMITED_CRAFTING, true)
+            w.setGameRule(GameRule.DO_LIMITED_CRAFTING, false)
             w.setGameRule(GameRule.SPECTATORS_GENERATE_CHUNKS, false)
             w.setGameRule(GameRule.SEND_COMMAND_FEEDBACK, true)
             w.setGameRule(GameRule.LOG_ADMIN_COMMANDS, true)
