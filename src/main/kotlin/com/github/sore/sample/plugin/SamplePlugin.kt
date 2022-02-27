@@ -10,20 +10,15 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class SamplePlugin : JavaPlugin() {
     override fun onEnable() {
-        for (world in server.worlds) {
-            world.setGameRule(GameRule.SPAWN_RADIUS, 2)
-            world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true)
-            world.setGameRule(GameRule.COMMAND_BLOCK_OUTPUT, false)
-            world.setGameRule(GameRule.DO_LIMITED_CRAFTING, true)
-            world.setGameRule(GameRule.SPECTATORS_GENERATE_CHUNKS, false)
-            world.setGameRule(GameRule.SEND_COMMAND_FEEDBACK, true)
-            world.setGameRule(GameRule.LOG_ADMIN_COMMANDS, true)
-        }
+        setupRecipe()
+        setupWorlds()
+    }
 
+    private fun setupRecipe() {
         server.addRecipe(
             ShapedRecipe(
-                NamespacedKey.minecraft("godapple"),
-                SampleItem.godapple
+                NamespacedKey.minecraft("god_apple"),
+                SampleItem.god_apple
             ).apply {
                 shape(
                     "GGG",
@@ -34,5 +29,17 @@ class SamplePlugin : JavaPlugin() {
                 setIngredient('A', ItemStack(Material.APPLE))
             }
         )
+    }
+
+    private fun setupWorlds() {
+        for (w in server.worlds) {
+            w.setGameRule(GameRule.SPAWN_RADIUS, 2)
+            w.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true)
+            w.setGameRule(GameRule.COMMAND_BLOCK_OUTPUT, false)
+            w.setGameRule(GameRule.DO_LIMITED_CRAFTING, true)
+            w.setGameRule(GameRule.SPECTATORS_GENERATE_CHUNKS, false)
+            w.setGameRule(GameRule.SEND_COMMAND_FEEDBACK, true)
+            w.setGameRule(GameRule.LOG_ADMIN_COMMANDS, true)
+        }
     }
 }
