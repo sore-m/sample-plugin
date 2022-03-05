@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
 
     implementation("io.github.monun:heartbeat-coroutines:0.0.3")
     implementation("io.github.monun:kommand-api:2.8.1")
