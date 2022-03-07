@@ -20,7 +20,7 @@ dependencies {
 
     implementation("io.github.monun:heartbeat-coroutines:0.0.3")
     implementation("io.github.monun:kommand-api:2.8.1")
-    implementation("io.github.monun:tap-api:4.3.2")
+    implementation("io.github.monun:tap-api:4.4.0")
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
 }
