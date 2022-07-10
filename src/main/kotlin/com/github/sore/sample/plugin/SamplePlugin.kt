@@ -1,5 +1,6 @@
 package com.github.sore.sample.plugin
 
+import com.github.sore.sample.EventListener
 import com.github.sore.sample.SampleItem
 import org.bukkit.GameRule
 import org.bukkit.Material
@@ -9,10 +10,18 @@ import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.plugin.java.JavaPlugin
 
 class SamplePlugin : JavaPlugin() {
+
+    companion object {
+        lateinit var instance: SamplePlugin
+            private set
+    }
     override fun onEnable() {
+        instance = this
         setupRecipe()
         setupWorlds()
+        server.pluginManager.registerEvents(EventListener(), this)
     }
+
 
     private fun setupRecipe() {
         server.addRecipe(
