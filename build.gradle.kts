@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.7.10"
-    kotlin("plugin.serialization") version "1.7.10"
+    kotlin("jvm") version "1.8.0"
+    kotlin("plugin.serialization") version "1.8.0"
 }
 
 java {
@@ -12,15 +12,15 @@ project.extra.set("pluginName", name.split('-').joinToString("") { it.capitalize
 
 repositories {
     mavenCentral()
+    mavenLocal()
     maven(url = "https://papermc.io/repo/repository/maven-public/")
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT")
 
-    implementation("io.github.monun:heartbeat-coroutines:0.0.3")
-    implementation("io.github.monun:kommand-api:2.10.0")
-    implementation("io.github.monun:tap-api:4.4.0")
+    implementation("io.github.monun:kommand-api:3.1.0")
+    implementation("io.github.monun:invfx-api:3.2.0")
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
 }
@@ -40,7 +40,7 @@ tasks {
     create<Jar>("paperJar") {
         from(sourceSets["main"].output)
         archiveBaseName.set(project.extra.properties["pluginName"].toString())
-        archiveVersion.set("") // For bukkit plugin update
+        archiveVersion.set("")
 
         doLast {
             copy {

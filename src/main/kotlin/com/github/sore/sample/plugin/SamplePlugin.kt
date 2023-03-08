@@ -1,29 +1,37 @@
 package com.github.sore.sample.plugin
 
-import com.github.sore.sample.EventListener
 import com.github.sore.sample.SampleItem
 import org.bukkit.GameRule
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.event.Listener
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.plugin.java.JavaPlugin
 
-class SamplePlugin : JavaPlugin() {
+class SamplePlugin : JavaPlugin(), Listener {
 
-    companion object {
-        lateinit var instance: SamplePlugin
-            private set
-    }
     override fun onEnable() {
-        instance = this
         setupRecipe()
         setupWorlds()
-        server.pluginManager.registerEvents(EventListener(), this)
+        server.pluginManager.registerEvents(EventListener(samplePlugin = this), this)
     }
 
-
     private fun setupRecipe() {
+        server.addRecipe(
+            ShapedRecipe(
+                NamespacedKey.minecraft("light_apple"),
+                SampleItem.light_apple
+            ).apply {
+                shape(
+                    " G ",
+                    "GAG",
+                    " G "
+                )
+                setIngredient('G', ItemStack(Material.GOLD_INGOT))
+                setIngredient('A', ItemStack(Material.APPLE))
+            }
+        )
         server.addRecipe(
             ShapedRecipe(
                 NamespacedKey.minecraft("god_apple"),
@@ -42,13 +50,8 @@ class SamplePlugin : JavaPlugin() {
 
     private fun setupWorlds() {
         for (w in server.worlds) {
-            w.setGameRule(GameRule.SPAWN_RADIUS, 2)
             w.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true)
-            w.setGameRule(GameRule.COMMAND_BLOCK_OUTPUT, false)
-            w.setGameRule(GameRule.DO_LIMITED_CRAFTING, false)
             w.setGameRule(GameRule.SPECTATORS_GENERATE_CHUNKS, false)
-            w.setGameRule(GameRule.SEND_COMMAND_FEEDBACK, true)
-            w.setGameRule(GameRule.LOG_ADMIN_COMMANDS, true)
         }
     }
 }
