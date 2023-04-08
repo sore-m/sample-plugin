@@ -1,6 +1,7 @@
 package com.github.sore.sample.plugin
 
 import com.github.sore.sample.SampleItem
+import io.github.monun.kommand.kommand
 import org.bukkit.GameRule
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -13,7 +14,25 @@ class SamplePlugin : JavaPlugin(){
     override fun onEnable() {
         setupRecipe()
         setupWorlds()
-        server.pluginManager.registerEvents(EventListener(samplePlugin = this), this)
+        server.pluginManager.registerEvents(EventListener(), this)
+
+        kommand {
+            register("sample") {
+                requires { isPlayer && isOp }
+                then("item") {
+                    then("light_apple") {
+                        executes {
+                            player.inventory.addItem(SampleItem.light_apple)
+                        }
+                    }
+                    then("god_apple") {
+                        executes {
+                            player.inventory.addItem(SampleItem.god_apple)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun setupRecipe() {

@@ -17,9 +17,10 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot:1.19.4-R0.1-SNAPSHOT")
 
-    implementation("io.github.monun:kommand-api:3.1.0")
+    implementation("io.github.monun:kommand-api:3.1.3")
     implementation("io.github.monun:invfx-api:3.2.0")
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
@@ -45,7 +46,7 @@ tasks {
         doLast {
             copy {
                 from(archiveFile)
-                val plugins = File(rootDir, ".debug/plugins/")
+                val plugins = File(rootDir, ".server/plugins/")
                 into(if (File(plugins, archiveFileName.get()).exists()) File(plugins, "update") else plugins)
             }
         }
