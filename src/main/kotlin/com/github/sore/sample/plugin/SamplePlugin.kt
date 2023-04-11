@@ -2,6 +2,7 @@ package com.github.sore.sample.plugin
 
 import com.github.sore.sample.SampleItem
 import io.github.monun.kommand.kommand
+import io.github.monun.tap.fake.FakeEntityServer
 import org.bukkit.GameRule
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -9,12 +10,24 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.plugin.java.JavaPlugin
 
-class SamplePlugin : JavaPlugin(){
+class SamplePlugin : JavaPlugin() {
+    lateinit var fakeServer: FakeEntityServer
+        private set
 
     override fun onEnable() {
         setupRecipe()
         setupWorlds()
-        server.pluginManager.registerEvents(EventListener(), this)
+
+        fakeServer = FakeEntityServer.create(this)
+
+        server.apply {
+            pluginManager.registerEvents(
+                EventListener(
+                    fakeServer
+                ), this@SamplePlugin
+            )
+            scheduler.runTaskTimer(this@SamplePlugin, SchedulerTask(fakeServer), 0L, 1L)
+        }
 
         kommand {
             register("sample") {
@@ -32,6 +45,12 @@ class SamplePlugin : JavaPlugin(){
                     }
                 }
             }
+        }
+    }
+
+    override fun onDisable() {
+        if (this::fakeServer.isInitialized) {
+            fakeServer.clear()
         }
     }
 

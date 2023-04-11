@@ -1,16 +1,19 @@
 package com.github.sore.sample.plugin
 
 import com.destroystokyo.paper.event.server.PaperServerListPingEvent
+import io.github.monun.tap.fake.FakeEntityServer
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
-import org.bukkit.ChatColor
+import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerJoinEvent
+import org.bukkit.event.player.PlayerQuitEvent
 import java.util.Calendar
 import kotlin.random.Random.Default.nextInt
 
 class EventListener(
-    private val samplePlugin: SamplePlugin
+    private val fakeServer: FakeEntityServer
 ) : Listener {
 
     @EventHandler
@@ -19,7 +22,17 @@ class EventListener(
         e.numPlayers = c.get(Calendar.YEAR) * 10000 + (c.get(Calendar.MONTH) + 1) * 100 + c.get(Calendar.DAY_OF_MONTH)
         e.maxPlayers = c.get(Calendar.HOUR) * 10000 + c.get(Calendar.MINUTE) * 100 + c.get(Calendar.SECOND)
         e.motd(
-            Component.text().color(TextColor.color(nextInt(0xFFFFF))).content("${ChatColor.BOLD}Dev Server").build()
+            Component.keybind("Hello World!").color(TextColor.color(nextInt(0xFFFFF))).decorate(TextDecoration.BOLD)
         )
+    }
+
+    @EventHandler
+    fun onPlayerJoinEvent(e: PlayerJoinEvent) {
+        fakeServer.addPlayer(e.player)
+    }
+
+    @EventHandler
+    fun onPlayerQuitEvent(e: PlayerQuitEvent) {
+        fakeServer.removePlayer(e.player)
     }
 }

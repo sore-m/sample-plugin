@@ -22,6 +22,8 @@ dependencies {
 
     implementation("io.github.monun:kommand-api:3.1.3")
     implementation("io.github.monun:invfx-api:3.2.0")
+    implementation("io.github.monun:tap-api:4.9.4")
+
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
 }

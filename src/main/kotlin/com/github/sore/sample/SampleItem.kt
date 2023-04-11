@@ -9,7 +9,6 @@ object SampleItem {
     val light_apple = ItemStack(Material.GOLDEN_APPLE).apply {
         itemMeta = itemMeta.apply {
             displayName(text("황금 사과").color(TextColor.color(0xffffff)))
-            //.decorate(TextDecoration.ITALIC)
         }
     }
     val god_apple = ItemStack(Material.ENCHANTED_GOLDEN_APPLE).apply {
