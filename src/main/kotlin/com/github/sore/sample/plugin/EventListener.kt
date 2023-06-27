@@ -25,14 +25,4 @@ class EventListener(
             Component.keybind("Hello World!").color(TextColor.color(nextInt(0xFFFFF))).decorate(TextDecoration.BOLD)
         )
     }
-
-    @EventHandler
-    fun onPlayerJoinEvent(e: PlayerJoinEvent) {
-        fakeServer.addPlayer(e.player)
-    }
-
-    @EventHandler
-    fun onPlayerQuitEvent(e: PlayerQuitEvent) {
-        fakeServer.removePlayer(e.player)
-    }
 }
