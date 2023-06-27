@@ -17,12 +17,9 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
-    compileOnly("org.spigotmc:spigot:1.19.4-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
 
     implementation("io.github.monun:kommand-api:3.1.3")
-    implementation("io.github.monun:invfx-api:3.2.0")
-    implementation("io.github.monun:tap-api:4.9.4")
 
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
