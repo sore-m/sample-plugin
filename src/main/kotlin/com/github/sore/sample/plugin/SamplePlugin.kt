@@ -11,22 +11,15 @@ import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.plugin.java.JavaPlugin
 
 class SamplePlugin : JavaPlugin() {
-    lateinit var fakeServer: FakeEntityServer
-        private set
 
     override fun onEnable() {
         setupRecipe()
         setupWorlds()
 
-        fakeServer = FakeEntityServer.create(this)
-
         server.apply {
             pluginManager.registerEvents(
-                EventListener(
-                    fakeServer
-                ), this@SamplePlugin
+                EventListener(), this@SamplePlugin
             )
-            scheduler.runTaskTimer(this@SamplePlugin, SchedulerTask(fakeServer), 0L, 1L)
         }
 
         kommand {
