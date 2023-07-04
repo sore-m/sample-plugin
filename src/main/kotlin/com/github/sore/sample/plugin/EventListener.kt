@@ -1,14 +1,11 @@
 package com.github.sore.sample.plugin
 
 import com.destroystokyo.paper.event.server.PaperServerListPingEvent
-import io.github.monun.tap.fake.FakeEntityServer
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.event.player.PlayerQuitEvent
 import java.util.Calendar
 import kotlin.random.Random.Default.nextInt
 
