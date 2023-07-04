@@ -2,7 +2,6 @@ package com.github.sore.sample.plugin
 
 import com.github.sore.sample.SampleItem
 import io.github.monun.kommand.kommand
-import io.github.monun.tap.fake.FakeEntityServer
 import org.bukkit.GameRule
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
