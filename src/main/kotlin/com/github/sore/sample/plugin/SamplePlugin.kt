@@ -40,12 +40,6 @@ class SamplePlugin : JavaPlugin() {
         }
     }
 
-    override fun onDisable() {
-        if (this::fakeServer.isInitialized) {
-            fakeServer.clear()
-        }
-    }
-
     private fun setupRecipe() {
         server.addRecipe(
             ShapedRecipe(
