@@ -10,7 +10,6 @@ import java.util.Calendar
 import kotlin.random.Random.Default.nextInt
 
 class EventListener(
-    private val fakeServer: FakeEntityServer
 ) : Listener {
 
     @EventHandler
