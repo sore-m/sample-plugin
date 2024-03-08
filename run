@@ -17,20 +17,20 @@ REPO_DEPLOY="$REPO_ROOT/deploy"
 DIR=".server"
 
 ## Server type (local path or type[vanilla, spigot, paper]-version[1.xx.x, unspecified]-build[latest, unspecified, xx]-[dev])
-SERVER="paper-1.20.1-latest"
+SERVER="paper-1.20.4-latest"
 
 ## Server memory (GB)
-MEMORY=8
+MEMORY=4
 
 ## When the server shuts down, use tar to back up.
 BACKUP=false
 
 ## The server will always restart.
-RESTART=true
+RESTART=false
 
 ################## Spigot or Paper Configurations ##################
 ## The maximum amount of players that the server will allow, this will bypass the max-players= value in server.properties file.
-PLAYERS=100
+PLAYERS=20
 
 ## This parameter allows you to manually define the plugins directory to use for the server.
 PLUGINS="plugins"
@@ -47,7 +47,7 @@ DEBUG_PORT=-1
 # Preinstallation plugins (url)
 DEFAULT_PLUGINS=(
    'https://github.com/monun/auto-reloader/releases/download/0.0.6/auto-reloader-0.0.6.jar'
-)
+   )
 
 # Uncomment to enable OpenJ9 performance tuning for VMs
 # VIRTUALIZED=true
