@@ -1,25 +1,23 @@
 plugins {
-    kotlin("jvm") version "1.9.22"
-    kotlin("plugin.serialization") version "1.9.22"
+    kotlin("jvm") version "1.9.23"
+    kotlin("plugin.serialization") version "1.9.23"
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 project.extra.set("packageName", name.replace("-", ""))
 project.extra.set("pluginName", name.split('-').joinToString("") { it.capitalize() })
 
 repositories {
-    mavenCentral()
-    mavenLocal()
-    maven(url = "https://papermc.io/repo/repository/maven-public/")
+    maven{
+        url = uri("https://repo.papermc.io/repository/maven-public/")
+    }
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
-
-    implementation("io.github.monun:kommand-api:3.1.3")
+    compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
 
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
